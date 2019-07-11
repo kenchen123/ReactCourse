@@ -12,6 +12,10 @@ export class Department extends Component {
     this.refrshList();
   }
 
+  componentDidUpdate() {
+    this.refrshList();
+  }
+
   refrshList() {
     fetch("https://localhost:44306/api/department").then(response =>
       response.json().then(data => {
