@@ -84,7 +84,7 @@ export class Employee extends Component {
 
                     <Button
                       className="mr-2"
-                      onClick={() => this.deleteDep(emp.EmployeeID)}
+                      onClick={() => this.deleteEmp(emp.EmployeeID)}
                       variant="danger"
                     >
                       Delete

@@ -7,8 +7,16 @@ export class AddEmpModal extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { snackbaropen: false, snackbarmsg: "" };
+    this.state = { deps: [], snackbaropen: false, snackbarmsg: "" };
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    fetch("https://localhost:44306/api/department").then(response =>
+      response.json().then(data => {
+        this.setState({ deps: data });
+      })
+    );
   }
 
   snackbarClose = event => {
@@ -91,12 +99,13 @@ export class AddEmpModal extends Component {
                   </Form.Group>
                   <Form.Group controlId="Department">
                     <Form.Label>Department</Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="Department"
-                      required
-                      placeholder="Department"
-                    />
+                    <Form.Control as="select">
+                      {this.state.deps.map(dep => (
+                        <option key={dep.DepartmentID}>
+                          {dep.DepartmentName}
+                        </option>
+                      ))}
+                    </Form.Control>
                   </Form.Group>
                   <Form.Group controlId="MailID">
                     <Form.Label>Mail ID</Form.Label>
@@ -110,7 +119,7 @@ export class AddEmpModal extends Component {
                   <Form.Group controlId="DOJ">
                     <Form.Label>Date of Join</Form.Label>
                     <Form.Control
-                      type="text"
+                      type="date"
                       name="DOJ"
                       required
                       placeholder="DOJ"
