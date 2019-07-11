@@ -1,9 +1,14 @@
 import React, { Component } from "react";
-import { Modal, Button, Row, Col, Form } from "react-bootstrap";
+import { Modal, Button, Row, Col, Form, FormGroup } from "react-bootstrap";
 
 export class AddDepModal extends Component {
   constructor(props) {
     super(props);
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    alert(event.target.DepartmentName.value);
   }
 
   render() {
@@ -20,7 +25,28 @@ export class AddDepModal extends Component {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className="container">To add Form fields for department.</div>
+          <div className="container">
+            <Row>
+              <Col sm={6}>
+                <Form onSubmit={this.handleSubmit}>
+                  <Form.Group controlId="DepartmentName">
+                    <Form.Label>Department Name</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="DepartmentName"
+                      required
+                      placeholder="Department Name"
+                    />
+                  </Form.Group>
+                  <Form.Group>
+                    <Button variant="primary" type="submit">
+                      Add Department
+                    </Button>
+                  </Form.Group>
+                </Form>
+              </Col>
+            </Row>
+          </div>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="danger" onClick={this.props.onHide}>
