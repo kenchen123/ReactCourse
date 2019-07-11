@@ -21,7 +21,7 @@ export class AddDepModal extends Component {
     fetch("https://localhost:44306/api/department", {
       method: "POST",
       headers: {
-        Accept: "applocation/json",
+        Accept: "application/json",
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
